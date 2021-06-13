@@ -1,0 +1,11 @@
+.table .thead-dark th {
+    text-transform: uppercase;
+}
+
+.clickable {
+    cursor: pointer;
+}
+
+.clickable:hover {
+    color: blue;
+}
