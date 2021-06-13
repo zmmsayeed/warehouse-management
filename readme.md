@@ -22,8 +22,15 @@ To run the already built application:
 cd ./warehouse_management
 npm install
 ```
-- Run the application locally using the following command:
+- Navigate to the front end folder and create a build:
 ```shell
+cd ./public/client
+npm run build
+```
+- Start the application by going back to the root folder:
+```shell
+cd ..
+cd ..
 npm start
 ```
 
