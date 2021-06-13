@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Modal from 'react-bootstrap/Modal'
+import Swal from 'sweetalert2'
 import './Dashboard.css';
 
 class Dashboard extends React.Component {
@@ -83,8 +84,23 @@ class Dashboard extends React.Component {
                 this.handleClose()
             })
         }
+    }
 
-
+    deleteItem = async (id) => {
+        Swal.fire({
+            title: 'Do you want to save the changes?',
+            icon: 'info',
+            showCancelButton: true,
+            confirmButtonText: `Delete`,
+        }).then(async (result) => {
+            /* Read more about isConfirmed, isDenied below */
+            if (result.isConfirmed) {
+                let res = await axios.get("http://localhost:8080/api/deleteItem?id=" + id)
+                this.setState({
+                    items: res.data.items
+                })
+            }
+        })
     }
 
     render() {
@@ -123,7 +139,9 @@ class Dashboard extends React.Component {
                                         Edit
                                     </span>
                                     &nbsp; | &nbsp;
-                                    <span className="clickable">Delete</span>
+                                    <span className="clickable" onClick={() => this.deleteItem(item.id)}>
+                                        Delete
+                                    </span>
                                 </td>
                             </tr>
                         ))
